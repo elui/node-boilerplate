@@ -30,7 +30,7 @@ module.exports = {
       repo : "git@github.com:elui/wanderwize.git",
       path : "/home/ubuntu/wanderwize",
       "post-setup" : "ls -la",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.config.js --env production",
       env : {
         "MONGODB" : "mongodb://wanderwizeapp:prod@ds159217.mlab.com:59217/wanderwize",
         "port" : 80
