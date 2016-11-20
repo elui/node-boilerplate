@@ -33,7 +33,7 @@ module.exports = {
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.config.js --env production",
       env : {
         "MONGODB" : "mongodb://wanderwizeapp:prod@ds159217.mlab.com:59217/wanderwize",
-        "port" : 80
+        "PORT" : 80
       }
     }
   }
