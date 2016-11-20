@@ -5,7 +5,6 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var dotenv = require('dotenv');
 var React = require('react');
 var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
@@ -16,8 +15,7 @@ var jwt = require('jsonwebtoken');
 var moment = require('moment');
 var request = require('request');
 
-// Load environment variables from .env file
-dotenv.load();
+var config = require('./default');
 
 // ES6 Transpiler
 require('babel-core/register');
@@ -37,7 +35,7 @@ var configureStore = require('./app/store/configureStore').default;
 var app = express();
 
 
-mongoose.connect(process.env.MONGODB);
+mongoose.connect(process.env.MONGODB || config.MONGODB);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
@@ -60,7 +58,7 @@ var hbs = exphbs.create({
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.PORT);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());

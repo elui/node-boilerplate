@@ -1,0 +1,4 @@
+{
+	"MONGODB" : "mongodb://localhost/wanderwize",
+	"PORT" : 3000
+}
