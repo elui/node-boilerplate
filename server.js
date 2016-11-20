@@ -15,7 +15,9 @@ var jwt = require('jsonwebtoken');
 var moment = require('moment');
 var request = require('request');
 
-var config = require('./default');
+var routes = require('./routes');
+
+var config = require('./default')
 
 // ES6 Transpiler
 require('babel-core/register');
@@ -29,7 +31,7 @@ var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
 
 // React and Server-Side Rendering
-var routes = require('./app/routes');
+var reactRoutes = require('./app/routes');
 var configureStore = require('./app/store/configureStore').default;
 
 var app = express();
@@ -88,16 +90,7 @@ app.use(function(req, res, next) {
   }
 });
 
-app.post('/contact', contactController.contactPost);
-app.put('/account', userController.ensureAuthenticated, userController.accountPut);
-app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
-app.post('/signup', userController.signupPost);
-app.post('/login', userController.loginPost);
-app.post('/forgot', userController.forgotPost);
-app.post('/reset/:token', userController.resetPost);
-app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
-app.post('/auth/facebook', userController.authFacebook);
-app.get('/auth/facebook/callback', userController.authFacebookCallback);
+routes.loadRoutes(app);
 
 // React server rendering
 app.use(function(req, res) {
@@ -108,7 +101,7 @@ app.use(function(req, res) {
 
   var store = configureStore(initialState);
 
-  Router.match({ routes: routes.default(store), location: req.url }, function(err, redirectLocation, renderProps) {
+  Router.match({ routes: reactRoutes.default(store), location: req.url }, function(err, redirectLocation, renderProps) {
     if (err) {
       res.status(500).send(err.message);
     } else if (redirectLocation) {
