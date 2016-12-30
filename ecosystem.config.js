@@ -32,7 +32,7 @@ module.exports = {
       "post-setup" : "ls -la",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.config.js --env production",
       env : {
-        "MONGODB" : "mongodb://wanderwizeapp:prod@ds159217.mlab.com:59217/wanderwize",
+        "MONGODB" : "mongodb://wanderwize-prod:wanderwize@ds159217.mlab.com:59217/wanderwize",
         "PORT" : 80
       }
     }
