@@ -6,7 +6,6 @@ var moment = require('moment');
 var request = require('request');
 var qs = require('querystring');
 var User = require('../models/User');
-var config = require('../default');
 
 function generateToken(user) {
   var payload = {
@@ -15,7 +14,7 @@ function generateToken(user) {
     iat: moment().unix(),
     exp: moment().add(7, 'days').unix()
   };
-  return jwt.sign(payload, process.env.TOKEN_SECRET || config.TOKEN_SECRET);
+  return jwt.sign(payload, process.env.TOKEN_SECRET);
 }
 
 /**

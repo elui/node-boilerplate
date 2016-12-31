@@ -1,4 +1,4 @@
-var config = require('./default');
+var config = require('./config/configure');
 var winston = require('winston');
 require('winston-papertrail').Papertrail;
 
@@ -27,8 +27,7 @@ var loggingTransports = {
   })
 };
 
-var transports = process.env.LOGGERS || config.LOGGERS || [];
-console.log(transports);
+var transports = config.get('loggers');
 
 var logger = new winston.Logger({
   transports: transports.map(function(x) { 

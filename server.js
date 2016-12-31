@@ -17,7 +17,7 @@ var request = require('request');
 var logger = require('./logger');
 var routes = require('./routes');
 
-var config = require('./default')
+var config = require('./config/configure');
 
 // ES6 Transpiler
 require('babel-core/register');
@@ -36,8 +36,7 @@ var configureStore = require('./app/store/configureStore').default;
 
 var app = express();
 
-
-mongoose.connect(process.env.MONGODB || config.MONGODB);
+mongoose.connect(config.get('mongodb'));
 mongoose.connection.on('error', function() {
   logger.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
@@ -60,7 +59,7 @@ var hbs = exphbs.create({
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || config.PORT);
+app.set('port', config.get('port'));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -72,7 +71,7 @@ app.use(function(req, res, next) {
   req.isAuthenticated = function() {
     var token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
     try {
-      return jwt.verify(token, process.env.TOKEN_SECRET);
+      return jwt.verify(token, config.get('token_secret'));
     } catch (err) {
       return false;
     }

@@ -1,0 +1,5 @@
+{
+	"mongodb" : "mongodb://wanderwize-prod:wanderwize@ds159217.mlab.com:59217/wanderwize",
+    "port" : 80,
+    "loggers" : ["papertrailLogger"]
+}
