@@ -1,5 +1,6 @@
 {
 	"MONGODB" : "mongodb://localhost/wanderwize",
 	"PORT" : 3000,
-	"TOKEN_SECRET" : "test"
+	"TOKEN_SECRET" : "test",
+	"LOGGERS" : ["consoleLogger"]
 }

@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
 var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -15,6 +14,7 @@ var jwt = require('jsonwebtoken');
 var moment = require('moment');
 var request = require('request');
 
+var logger = require('./logger');
 var routes = require('./routes');
 
 var config = require('./default')
@@ -39,7 +39,7 @@ var app = express();
 
 mongoose.connect(process.env.MONGODB || config.MONGODB);
 mongoose.connection.on('error', function() {
-  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+  logger.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
 
@@ -62,7 +62,6 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || config.PORT);
 app.use(compression());
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
@@ -123,13 +122,14 @@ app.use(function(req, res) {
 // Production error handler
 if (app.get('env') === 'production') {
   app.use(function(err, req, res, next) {
-    console.error(err.stack);
+    logger.error(err.stack);
     res.sendStatus(err.status || 500);
   });
 }
 
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  logger.info('Express server listening on port ' + app.get('port'));
 });
+
 
 module.exports = app;

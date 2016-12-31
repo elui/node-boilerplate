@@ -1,7 +1,7 @@
 {
-  "name": "fragrant-boat",
+  "name": "wanderwize",
   "version": "1.0.0",
-  "description": "My app description",
+  "description": "Wanderwize Node Web Application",
   "scripts": {
     "build": "gulp build",
     "build:production": "gulp build --production",
@@ -39,7 +39,6 @@
     "jsonwebtoken": "^5.7.0",
     "moment": "^2.12.0",
     "mongoose": "^4.4.8",
-    "morgan": "^1.7.0",
     "nodemailer": "^2.3.0",
     "react": "15.1.0",
     "react-cookie": "^0.4.5",
@@ -55,6 +54,8 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
     "whatwg-fetch": "^0.11.0",
+    "winston": "^2.3.0",
+    "winston-papertrail": "^1.0.4",
     "yargs": "^4.3.2"
   },
   "devDependencies": {
