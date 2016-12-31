@@ -1,4 +1,4 @@
-## Wanderwize App
+## Boilerplate App
 
 
 ### Configuration
