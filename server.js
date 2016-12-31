@@ -36,6 +36,14 @@ var configureStore = require('./app/store/configureStore').default;
 
 var app = express();
 
+// Handle uncaught exceptions - error log it which includes
+// an email in production
+process.on('uncaughtException', function(err) {
+  logger.error(err);
+  process.exit(1);
+});
+
+// Connect to the database
 mongoose.connect(config.get('mongodb'));
 mongoose.connection.on('error', function() {
   logger.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
