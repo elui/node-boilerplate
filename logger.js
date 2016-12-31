@@ -27,7 +27,8 @@ var loggingTransports = {
   })
 };
 
-var transports = process.env.LOGGERS || config.LOGGERS;
+var transports = process.env.LOGGERS || config.LOGGERS || [];
+console.log(transports);
 
 var logger = new winston.Logger({
   transports: transports.map(function(x) { 
