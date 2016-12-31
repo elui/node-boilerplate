@@ -1,7 +1,7 @@
 var request = require('supertest');
 var server = require('../../server');
 
-describe('GET /', function() {
+describe('GET / Test', function() {
   it('should render ok', function(done) {
     request(server)
       .get('/')
@@ -9,10 +9,11 @@ describe('GET /', function() {
   });
 });
 
-describe('GET /contact', function() {
+describe('GET /contact Test', function() {
   it('should render ok', function(done) {
     request(server)
       .get('/contact')
       .expect(200, done);
   });
 });
+
