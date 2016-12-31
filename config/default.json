@@ -2,5 +2,6 @@
 	"mongodb" : "mongodb://localhost/wanderwize",
 	"port" : 3000,
 	"token_secret" : "test",
-	"loggers" : ["consoleLogger"]
+	"loggers" : ["consoleLogger"],
+	"facebook_secret" : "55a90deacf48ce064cdd7c0ec81df4b2"
 }

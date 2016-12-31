@@ -11,7 +11,7 @@ export function facebookLogin() {
     clientId: '1866822536888986',
     redirectUri: 'http://localhost:3000/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.8/dialog/oauth',
-    scope: 'email,user_location',
+    scope: 'email',
     width: 580,
     height: 400
   };

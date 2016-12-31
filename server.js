@@ -39,7 +39,7 @@ var app = express();
 // Handle uncaught exceptions - error log it which includes
 // an email in production
 process.on('uncaughtException', function(err) {
-  logger.error(err);
+  logger.error(err + "\n" + err.stack);
   process.exit(1);
 });
 

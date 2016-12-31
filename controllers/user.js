@@ -1,5 +1,6 @@
 var async = require('async');
 var crypto = require('crypto');
+var config = require('../config/configure');
 var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var moment = require('moment');
@@ -14,7 +15,7 @@ function generateToken(user) {
     iat: moment().unix(),
     exp: moment().add(7, 'days').unix()
   };
-  return jwt.sign(payload, process.env.token_secret);
+  return jwt.sign(payload, configure.get('client_secret'));
 }
 
 /**
@@ -285,14 +286,14 @@ exports.resetPost = function(req, res, next) {
  * Sign in with Facebook
  */
 exports.authFacebook = function(req, res) {
-  var profileFields = ['id', 'name', 'email', 'gender', 'location'];
+  var profileFields = ['id', 'name', 'email', 'gender'];
   var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
   var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + profileFields.join(',');
 
   var params = {
     code: req.body.code,
     client_id: req.body.clientId,
-    client_secret: process.env.FACEBOOK_SECRET,
+    client_secret: config.get('facebook_secret'),
     redirect_uri: req.body.redirectUri
   };
 
@@ -337,7 +338,6 @@ exports.authFacebook = function(req, res) {
               name: profile.name,
               email: profile.email,
               gender: profile.gender,
-              location: profile.location && profile.location.name,
               picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
               facebook: profile.id
             });
