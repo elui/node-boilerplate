@@ -8,9 +8,9 @@ import { browserHistory } from 'react-router';
 export function facebookLogin() {
   const facebook = {
     url: 'http://localhost:3000/auth/facebook',
-    clientId: '980220002068787',
+    clientId: '1866822536888986',
     redirectUri: 'http://localhost:3000/auth/facebook/callback',
-    authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
+    authorizationUrl: 'https://www.facebook.com/v2.8/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
     height: 400

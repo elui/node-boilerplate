@@ -17,15 +17,8 @@ var userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   gender: String,
   location: String,
-  website: String,
-  picture: String,
-  facebook: String,
-  twitter: String,
-  google: String,
-  github: String,
-  vk: String
 }, schemaOptions);
-
+  
 userSchema.pre('save', function(next) {
   var user = this;
   if (!user.isModified('password')) { return next(); }
